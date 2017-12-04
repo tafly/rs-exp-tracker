@@ -8,10 +8,15 @@ public class Application {
 
 		System.out.println("What would you like to do?");
 		command = input.next();
+		
+		Processing process = new Processing();
+		
 
 		switch (command) {
 		case "1":
 			System.out.println("Which skill?");
+			
+			process.logSkill(input.next());
 			break;
 
 		default:
