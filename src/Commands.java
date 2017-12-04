@@ -6,7 +6,7 @@ public class Commands {
 		String command;
 		Scanner input = new Scanner(System.in);
 
-		System.out.println("What would you like to do?");
+		System.out.println("What would you like to do? (1=Log XP Update, q=quit)");
 		command = input.next();
 		
 		Processing process = new Processing();
@@ -17,6 +17,9 @@ public class Commands {
 			System.out.println("Which skill?");
 			
 			process.logSkill(input.next());
+			break;
+		case "q":
+			System.out.println("Program is terminating!");
 			break;
 
 		default:
