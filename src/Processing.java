@@ -10,6 +10,9 @@ public class Processing {
 		
 		Scanner input = new Scanner(System.in);
 		
+		Commands commands = new Commands();
+		
+		
 		switch (skill) {
 		case "Agility":
 			System.out.println("Agility");
@@ -31,7 +34,9 @@ public class Processing {
 				
 				// Always close files.
 				bufferedWriter.close();
-
+				
+				commands.showCommands();
+				
 			} catch (IOException ex) {
 				System.out.println("Error reading file '" + fileName + "'");
 				// Or we could just do this:
