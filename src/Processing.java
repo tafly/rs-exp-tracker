@@ -1,3 +1,4 @@
+import java.net.*;
 import java.io.*;
 import java.util.Scanner;
 import java.util.Date;
@@ -38,5 +39,33 @@ public class Processing {
 		}
 
 		input.close();
+	}
+
+	void processURL(String player) {
+		try {
+			URL url = new URL(
+					"http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=" + player);
+
+			HttpURLConnection httpCon = (HttpURLConnection) url
+					.openConnection();
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					httpCon.getInputStream(), "UTF-8"));
+			
+			String inputLine;
+			
+			StringBuilder a = new StringBuilder();
+			while ((inputLine = in.readLine()) != null) {
+				a.append(inputLine);
+			}
+				
+			in.close();
+			String skills = a.toString();
+			
+			System.out.println(skills.replaceAll(",", "\n"));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
