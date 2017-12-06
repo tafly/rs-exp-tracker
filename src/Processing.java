@@ -78,10 +78,11 @@ public class Processing {
             String inputLine;
             while ((inputLine = br.readLine()) != null) {
                     //System.out.println(inputLine);
+            	System.out.println(player + " updated on CML (" + inputLine + ")");
             }
             br.close();
 
-            System.out.println(player + " updated on CML");
+            
             
             
 		} catch (Exception ex) {
