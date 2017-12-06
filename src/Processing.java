@@ -42,30 +42,52 @@ public class Processing {
 	}
 
 	void processURL(String player) {
+
+		String content = null;
+		URLConnection connection = null;
+		
 		try {
-			URL url = new URL(
-					"http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=" + player);
-
-			HttpURLConnection httpCon = (HttpURLConnection) url
-					.openConnection();
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					httpCon.getInputStream(), "UTF-8"));
+			connection = new URL("http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=" + player).openConnection();
 			
-			String inputLine;
+			Scanner scanner = new Scanner(connection.getInputStream());
 			
-			StringBuilder a = new StringBuilder();
-			while ((inputLine = in.readLine()) != null) {
-				a.append(inputLine);
-			}
-				
-			in.close();
-			String skills = a.toString();
+			scanner.useDelimiter("\\Z");
 			
-			System.out.println(skills.replaceAll(",", "\n"));
-
-		} catch (IOException e) {
-			e.printStackTrace();
+			content = scanner.next();
+			
+			scanner.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
+		
+		System.out.println(content);
+
+	}
+	
+	void updateCML(String player) {
+
+		
+		try {
+			URL url = new URL("http://www.crystalmathlabs.com/tracker/api.php?type=update&player=" + player);
+			URLConnection yc = url.openConnection();
+			yc.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+			// open the stream and put it into BufferedReader
+            BufferedReader br = new BufferedReader(new InputStreamReader(yc.getInputStream()));
+
+            String inputLine;
+            while ((inputLine = br.readLine()) != null) {
+                    //System.out.println(inputLine);
+            }
+            br.close();
+
+            System.out.println(player + " updated on CML");
+            
+            
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		
 	}
 }

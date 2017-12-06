@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Commands {
@@ -6,7 +7,7 @@ public class Commands {
 		Scanner input = new Scanner(System.in);
 
 		System.out
-				.println("What would you like to do? (1=Log XP Update, 2=Get Player Stats, q=quit)");
+				.println("What would you like to do? (1=Log XP Update, 2=Get Player Stats, 3=Update CML, q=quit)");
 		command = input.next();
 
 		Processing process = new Processing();
@@ -21,6 +22,24 @@ public class Commands {
 			System.out.println("Which player?");
 
 			process.processURL(input.next());
+			break;
+		case "3":
+
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(
+						"cmlplayers.txt"));
+
+				for (String line = br.readLine(); line != null; line = br
+						.readLine()) {
+					process.updateCML(line);
+				}
+
+				br.close();
+			} catch (IOException ex) {
+
+			}
+
+			
 			break;
 		case "q":
 			System.out.println("Program is terminating!");
