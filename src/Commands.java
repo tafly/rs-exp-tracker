@@ -27,7 +27,7 @@ public class Commands {
 
 			try {
 				BufferedReader br = new BufferedReader(new FileReader(
-						"cmlplayers.txt"));
+						"zplayers.txt"));
 
 				for (String line = br.readLine(); line != null; line = br
 						.readLine()) {
