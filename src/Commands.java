@@ -22,8 +22,8 @@ public class Commands {
 		case "2":
 			// command to get players stat by skill, i.e. agility
 			System.out.println("Which player?");
-
 			
+			process.processSkill(input.next());
 			break;
 		case "3":
 			// command to get all player stats

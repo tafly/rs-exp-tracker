@@ -41,31 +41,57 @@ public class Processing {
 		input.close();
 	}
 
-	void processURL(String player) {
-
+	String processURL(String player) {
+		/*
 		String content = null;
 		URLConnection connection = null;
+
+		String stats = null;
+		
 		
 		try {
 			connection = new URL("http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=" + player).openConnection();
 			
 			Scanner scanner = new Scanner(connection.getInputStream());
-			
 			scanner.useDelimiter("\\Z");
+			//stats = scanner.next();
 			
-			content = scanner.next();
+			scanner.close();			
 			
-			scanner.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		*/
+		String stats = null;
+		
+		try {
+			URL url = new URL("http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=" + player);
+			URLConnection urlConn = url.openConnection();
+			BufferedReader in = new BufferedReader(new InputStreamReader(urlConn.getInputStream(), "UTF-8"));
+			
+			String inputLine;
+			StringBuilder a = new StringBuilder();
+			
+			while ((inputLine = in.readLine()) != null) {
+				a.append(inputLine + "\n");
+			}
+			
+			in.close();
+			
+			stats = a.toString();
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		
-		System.out.println(content);
+		
+		return stats;
 
 	}
 	
 	void updateCML(String player) {
+
+	
 
 		
 		try {
@@ -87,7 +113,98 @@ public class Processing {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+
+	}
+
+	void processSkill(String player) {
+		String stats = processURL(player);
+		String[] statsArray = stats.split("\n");
+		int statnumber = 0;
+		boolean skillexists = false;
 		
+		Scanner input = new Scanner(System.in);
+		System.out.println("Skill?");
+		String skill = input.next();
+		
+		
+		switch (skill) {
+		case "Cooking":
+			statnumber = 8;	
+			skillexists = true;
+			break;
+		case "Woodcutting":
+			statnumber = 9;	
+			skillexists = true;
+			break;
+		case "Fletching":
+			statnumber = 10;	
+			skillexists = true;
+			break;
+		case "Fishing":
+			statnumber = 11;	
+			skillexists = true;
+			break;
+		case "Firemaking":
+			statnumber = 12;	
+			skillexists = true;
+			break;
+		case "Crafting":
+			statnumber = 13;	
+			skillexists = true;
+			break;
+		case "Smithing":
+			statnumber = 14;	
+			skillexists = true;
+			break;
+		case "Mining":
+			statnumber = 15;	
+			skillexists = true;
+			break;
+		case "Herblore":
+			statnumber = 16;	
+			skillexists = true;
+			break;
+		case "Agility":
+			statnumber = 17;	
+			skillexists = true;
+			break;
+		case "Thieving":
+			statnumber = 18;	
+			skillexists = true;
+			break;
+		case "Slayer":
+			statnumber = 19;	
+			skillexists = true;
+			break;
+		case "Farming":
+			statnumber = 20;	
+			skillexists = true;
+			break;
+		case "Runecraft":
+			statnumber = 21;	
+			skillexists = true;
+			break;
+		case "Hunter":
+			statnumber = 22;	
+			skillexists = true;
+			break;
+		case "Construction":
+			statnumber = 23;
+			skillexists = true;
+			break;
+		default:
+			System.out.println("Unknown skill!");
+		}
+		
+		
+		if (skillexists = true) {
+			String[] statsplit = statsArray[statnumber].split(",");
+			
+			System.out.println(skill + " rank is " + String.format("%,d",Integer.parseInt(statsplit[0])));
+			System.out.println(skill + " level is " + String.format("%,d",Integer.parseInt(statsplit[1])));
+			System.out.println(skill + " xp is " + String.format("%,d",Integer.parseInt(statsplit[2])));
+		}
 		
 	}
+
 }
