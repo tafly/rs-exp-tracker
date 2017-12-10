@@ -198,7 +198,7 @@ public class Processing {
 		}
 		
 		
-		if (skillexists = true) {
+		if (skillexists == true) {
 			String[] statsplit = statsArray[statnumber].split(",");
 			
 			System.out.println(skill + " rank is " + String.format("%,d",Integer.parseInt(statsplit[0])));
