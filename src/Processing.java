@@ -120,7 +120,8 @@ public class Processing {
 		String stats = processURL(player);
 		String[] statsArray = stats.split("\n");
 		int statnumber = 0;
-		boolean skillexists = false;
+		boolean skillexists;
+		skillexists = false;
 		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Skill?");
@@ -205,6 +206,7 @@ public class Processing {
 			System.out.println(skill + " xp is " + String.format("%,d",Integer.parseInt(statsplit[2])));
 		}
 		
+		input.close();
 	}
 
 }

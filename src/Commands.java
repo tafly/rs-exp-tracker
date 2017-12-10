@@ -6,8 +6,7 @@ public class Commands {
 		String command;
 		Scanner input = new Scanner(System.in);
 
-		System.out
-				.println("What would you like to do? (1=Log XP Update, 2=Get Player stat By Skill, 3=Get Player Stats, 4=Update CML, q=quit)");
+		System.out.println("What would you like to do? (1=Log XP Update, 2=Get Player stat By Skill, 3=Get Player Stats, 4=Update CML, q=quit)");
 		command = input.next();
 
 		Processing process = new Processing();
